@@ -51,5 +51,9 @@
     kill(self.pid.intValue, SIGKILL);
 }
 
+- (BOOL)isRunning
+{
+    return self.info != nil;
+}
 
 @end

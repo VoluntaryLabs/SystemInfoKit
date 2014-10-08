@@ -16,4 +16,7 @@
 - (NSDictionary *)info;
 - (NSString *)name;
 
+- (void)kill;
+- (BOOL)isRunning;
+
 @end
