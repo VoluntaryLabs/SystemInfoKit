@@ -17,5 +17,6 @@ FOUNDATION_EXPORT const unsigned char SystemInfoKitVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <SystemInfoKit/PublicHeader.h>
 
 #import "SIProcesses.h"
+#import "SIProcess.h"
 #import "SINetworkMonitor.h"
 #import "SIProcessKiller.h"

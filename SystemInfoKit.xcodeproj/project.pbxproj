@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		AAD0C0AB19E48B4400B24217 /* SystemInfoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0AA19E48B4400B24217 /* SystemInfoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAD0C0B519E48B4400B24217 /* SystemInfoKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD0C0B419E48B4400B24217 /* SystemInfoKitTests.m */; };
-		AAD0C0C419E48C6000B24217 /* SIProcesses.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0BE19E48C6000B24217 /* SIProcesses.h */; };
+		AAD0C0C419E48C6000B24217 /* SIProcesses.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0BE19E48C6000B24217 /* SIProcesses.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAD0C0C519E48C6000B24217 /* SIProcesses.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD0C0BF19E48C6000B24217 /* SIProcesses.m */; };
-		AAD0C0C619E48C6000B24217 /* SINetworkMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0C019E48C6000B24217 /* SINetworkMonitor.h */; };
+		AAD0C0C619E48C6000B24217 /* SINetworkMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0C019E48C6000B24217 /* SINetworkMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAD0C0C719E48C6000B24217 /* SINetworkMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD0C0C119E48C6000B24217 /* SINetworkMonitor.m */; };
-		AAD0C0C819E48C6000B24217 /* SIProcessKiller.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0C219E48C6000B24217 /* SIProcessKiller.h */; };
+		AAD0C0C819E48C6000B24217 /* SIProcessKiller.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0C219E48C6000B24217 /* SIProcessKiller.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAD0C0C919E48C6000B24217 /* SIProcessKiller.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD0C0C319E48C6000B24217 /* SIProcessKiller.m */; };
-		AAD0C0CC19E495B700B24217 /* SIProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0CA19E495B700B24217 /* SIProcess.h */; };
+		AAD0C0CC19E495B700B24217 /* SIProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0CA19E495B700B24217 /* SIProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAD0C0CD19E495B700B24217 /* SIProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD0C0CB19E495B700B24217 /* SIProcess.m */; };
 /* End PBXBuildFile section */
 
