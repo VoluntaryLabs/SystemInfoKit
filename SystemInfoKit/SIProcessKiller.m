@@ -61,6 +61,17 @@ static SIProcessKiller *sharedSIProcessKiller = nil;
     [self setOldTasksDict:oldTasksDict];
 }
 
+- (void)removeKillTask:(NSTask *)aTask
+{
+    NSString *processName = [aTask.launchPath lastPathComponent];
+    //NSNumber *processId = [NSNumber numberWithInt:aTask.processIdentifier];
+    NSMutableDictionary *oldTasksDict = self.oldTasksDict.mutableCopy;
+
+    [oldTasksDict removeObjectForKey:processName];
+    
+    [self setOldTasksDict:oldTasksDict];
+}
+
 - (void)killOldTasks
 {
     NSDictionary *dict = self.oldTasksDict;
@@ -76,6 +87,7 @@ static SIProcessKiller *sharedSIProcessKiller = nil;
         {
             NSLog(@"killing old process '%@' with pid: %@", processName, processId);
             kill([processId intValue], SIGKILL);
+            sleep(1);
         }
         else
         {
@@ -91,6 +103,7 @@ static SIProcessKiller *sharedSIProcessKiller = nil;
         }
         else
         {
+            NSLog(@"killed old process '%@' with pid: %@", processName, processId);
             [newDict removeObjectForKey:processName];
         }
     }

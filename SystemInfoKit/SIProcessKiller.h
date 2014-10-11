@@ -14,5 +14,6 @@
 + (SIProcessKiller *)sharedSIProcessKiller;
 
 - (void)onRestartKillTask:(NSTask *)aTask;
+- (void)removeKillTask:(NSTask *)aTask;
 
 @end
