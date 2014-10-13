@@ -85,7 +85,7 @@ static SIProcessKiller *sharedSIProcessKiller = nil;
         
         if(processExists)
         {
-            NSLog(@"killing old process '%@' with pid: %@", processName, processId);
+            //NSLog(@"killing old process '%@' with pid: %@", processName, processId);
             kill([processId intValue], SIGKILL);
             sleep(1);
         }
