@@ -63,11 +63,16 @@ static SIProcessKiller *sharedSIProcessKiller = nil;
 
 - (void)removeKillTask:(NSTask *)aTask
 {
+    assert(aTask);
+    
     NSString *processName = [aTask.launchPath lastPathComponent];
     //NSNumber *processId = [NSNumber numberWithInt:aTask.processIdentifier];
     NSMutableDictionary *oldTasksDict = self.oldTasksDict.mutableCopy;
 
-    [oldTasksDict removeObjectForKey:processName];
+    if (processName && [oldTasksDict objectForKey:processName])
+    {
+        [oldTasksDict removeObjectForKey:processName];
+    }
     
     [self setOldTasksDict:oldTasksDict];
 }

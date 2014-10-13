@@ -94,4 +94,17 @@ static SINetwork *sharedSINetwork = nil;
     return nil;
 }
 
+- (NSMutableArray *)openPortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
+{
+    NSMutableArray *openPorts = [NSMutableArray array];
+    
+    for (int port = lowPort.intValue; port < highPort.intValue + 1; port ++)
+    {
+        NSNumber *portNumber = [NSNumber numberWithInt:port];
+        [openPorts addObject:portNumber];
+    }
+    
+    return openPorts;
+}
+
 @end
