@@ -34,7 +34,7 @@ static SINetwork *sharedSINetwork = nil;
 - (BOOL)hasOpenPort:(NSNumber *)aPort
 {
     int portno     = aPort.intValue;
-    char *hostname = "localhost";
+    char *hostname = "127.0.0.1";
     
     int sockfd;
     struct sockaddr_in serv_addr;
@@ -63,16 +63,17 @@ static SINetwork *sharedSINetwork = nil;
     
     serv_addr.sin_port = htons(portno);
     
-    BOOL isOpen = NO;
+    BOOL isOpen = YES;
     
-    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0)
+    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) == 0)
     {
-        //printf("Port is closed");
-        isOpen = YES;
-    } else
-    {
+        // we could connect so the port must be active
         isOpen = NO;
-        //printf("Port is active");
+        //printf("Port %s:%i is active", hostname, portno);
+    }
+    else
+    {
+        //printf("Port %s:%i is open", hostname, portno);
     }
     
     close(sockfd);
@@ -101,7 +102,11 @@ static SINetwork *sharedSINetwork = nil;
     for (int port = lowPort.intValue; port < highPort.intValue + 1; port ++)
     {
         NSNumber *portNumber = [NSNumber numberWithInt:port];
-        [openPorts addObject:portNumber];
+        
+        if ([self hasOpenPort:portNumber])
+        {
+            [openPorts addObject:portNumber];
+        }
     }
     
     return openPorts;
