@@ -18,7 +18,7 @@ static SIProcessKiller *sharedSIProcessKiller = nil;
     if (!sharedSIProcessKiller)
     {
         sharedSIProcessKiller = [[SIProcessKiller alloc] init];
-        [sharedSIProcessKiller killOldTasks];
+        [sharedSIProcessKiller killOldTasks];        
     }
     
     return sharedSIProcessKiller;
@@ -61,9 +61,14 @@ static SIProcessKiller *sharedSIProcessKiller = nil;
     [self setOldTasksDict:oldTasksDict];
 }
 
-- (void)removeKillTask:(NSTask *)aTask
+- (void)removeKillTask:(NSTask *)aTask 
 {
-    assert(aTask);
+    if (aTask == nil)
+    {
+        return;
+    }
+    
+    //assert(aTask);
     
     NSString *processName = [aTask.launchPath lastPathComponent];
     //NSNumber *processId = [NSNumber numberWithInt:aTask.processIdentifier];
