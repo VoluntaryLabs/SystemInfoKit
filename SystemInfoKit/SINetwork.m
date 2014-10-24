@@ -128,7 +128,7 @@ static SINetwork *sharedSINetwork = nil;
     {
         NSNumber *portNumber = [NSNumber numberWithInt:port];
         
-        if ([self canBindPort:portNumber])
+        if ([self canBindPort:portNumber] && ![self canConnectToPort:portNumber])
         {
             return portNumber;
         }
@@ -145,7 +145,7 @@ static SINetwork *sharedSINetwork = nil;
     {
         NSNumber *portNumber = [NSNumber numberWithInt:port];
         
-        if ([self canBindPort:portNumber])
+        if ([self canBindPort:portNumber] && ![self canConnectToPort:portNumber])
         {
             [openPorts addObject:portNumber];
         }
