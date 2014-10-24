@@ -36,8 +36,9 @@ static SINetwork *sharedSINetwork = nil;
     int sockfd;
     int portno = aPort.intValue;
     struct sockaddr_in serv_addr;
+    BOOL canBind = NO;
     
-//label:
+label:
     
     // create socket
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -60,17 +61,21 @@ static SINetwork *sharedSINetwork = nil;
     setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char*)&option, sizeof(option));
     
     // bind socket
-    if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+    if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0)
     {
-        printf("could NOT bind to port %i\n", portno);
-        return NO;
+        canBind = YES;
+        printf("V bind %i; ", portno);
     }
-    printf("could bind to port %i\n", portno);
+    else
+    {
+        canBind = NO;
+        printf("X bind %i; ", portno);
+    }
     
-    close(sockfd);
     //goto label;
+    close(sockfd);
     
-    return YES;
+    return canBind;
 }
 
 - (BOOL)canConnectToPort:(NSNumber *)aPort
@@ -111,11 +116,12 @@ static SINetwork *sharedSINetwork = nil;
     {
         // we could connect so the port must be active
         canConnect = YES;
-        printf("can connect to port %s:%i", hostname, portno);
+        printf("V conn %i\n", portno);
     }
     else
     {
-        printf("can't connect to port %s:%i", hostname, portno);
+        canConnect = NO;
+        printf("X conn %i\n", portno);
     }
     
     close(sockfd);
@@ -130,6 +136,7 @@ static SINetwork *sharedSINetwork = nil;
         
         if ([self canBindPort:portNumber] && ![self canConnectToPort:portNumber])
         {
+            printf("found unused port %i\n", portNumber.intValue);
             return portNumber;
         }
     }
@@ -137,7 +144,7 @@ static SINetwork *sharedSINetwork = nil;
     return nil;
 }
 
-- (NSMutableArray *)BindablePortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
+- (NSMutableArray *)bindablePortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
 {
     NSMutableArray *openPorts = [NSMutableArray array];
     

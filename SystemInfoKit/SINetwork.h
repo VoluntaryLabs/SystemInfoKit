@@ -15,7 +15,7 @@
 - (BOOL)canConnectToPort:(NSNumber *)aPort;
 - (BOOL)canBindPort:(NSNumber *)aPort;
 
-- (NSMutableArray *)BindablePortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
+- (NSMutableArray *)bindablePortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
 - (NSNumber *)firstBindablePortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
 
 @end
