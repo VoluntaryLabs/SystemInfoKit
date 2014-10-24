@@ -12,9 +12,10 @@
 
 + (SINetwork *)sharedSINetwork;
 
-- (BOOL)hasOpenPort:(NSNumber *)aPort;
+- (BOOL)canConnectToPort:(NSNumber *)aPort;
+- (BOOL)canBindPort:(NSNumber *)aPort;
 
-- (NSMutableArray *)openPortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
-- (NSNumber *)firstOpenPortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
+- (NSMutableArray *)BindablePortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
+- (NSNumber *)firstBindablePortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
 
 @end

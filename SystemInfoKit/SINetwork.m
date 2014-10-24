@@ -31,7 +31,49 @@ static SINetwork *sharedSINetwork = nil;
     
 }
 
-- (BOOL)hasOpenPort:(NSNumber *)aPort
+- (BOOL)canBindPort:(NSNumber *)aPort
+{
+    int sockfd;
+    int portno = aPort.intValue;
+    struct sockaddr_in serv_addr;
+    
+//label:
+    
+    // create socket
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0)
+    {
+        perror("ERROR opening socket");
+        return NO;
+    }
+    
+    // init socket
+    bzero((char *) &serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_addr.s_addr = INADDR_ANY;
+    serv_addr.sin_port = htons(portno);
+    
+    // reuse
+    
+    int option = 1;
+    sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char*)&option, sizeof(option));
+    
+    // bind socket
+    if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+    {
+        printf("could NOT bind to port %i\n", portno);
+        return NO;
+    }
+    printf("could bind to port %i\n", portno);
+    
+    close(sockfd);
+    //goto label;
+    
+    return YES;
+}
+
+- (BOOL)canConnectToPort:(NSNumber *)aPort
 {
     int portno     = aPort.intValue;
     char *hostname = "127.0.0.1";
@@ -63,12 +105,12 @@ static SINetwork *sharedSINetwork = nil;
     
     serv_addr.sin_port = htons(portno);
     
-    BOOL isOpen = YES;
+    BOOL canConnect = NO;
     
     if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) == 0)
     {
         // we could connect so the port must be active
-        isOpen = NO;
+        canConnect = YES;
         //printf("Port %s:%i is active", hostname, portno);
     }
     else
@@ -77,16 +119,16 @@ static SINetwork *sharedSINetwork = nil;
     }
     
     close(sockfd);
-    return isOpen;
+    return canConnect;
 }
 
-- (NSNumber *)firstOpenPortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
+- (NSNumber *)firstBindablePortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
 {
     for (int port = lowPort.intValue; port < highPort.intValue + 1; port ++)
     {
         NSNumber *portNumber = [NSNumber numberWithInt:port];
         
-        if ([self hasOpenPort:portNumber])
+        if ([self canBindPort:portNumber])
         {
             return portNumber;
         }
@@ -95,7 +137,7 @@ static SINetwork *sharedSINetwork = nil;
     return nil;
 }
 
-- (NSMutableArray *)openPortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
+- (NSMutableArray *)BindablePortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
 {
     NSMutableArray *openPorts = [NSMutableArray array];
     
@@ -103,7 +145,7 @@ static SINetwork *sharedSINetwork = nil;
     {
         NSNumber *portNumber = [NSNumber numberWithInt:port];
         
-        if ([self hasOpenPort:portNumber])
+        if ([self canBindPort:portNumber])
         {
             [openPorts addObject:portNumber];
         }
