@@ -111,11 +111,11 @@ static SINetwork *sharedSINetwork = nil;
     {
         // we could connect so the port must be active
         canConnect = YES;
-        //printf("Port %s:%i is active", hostname, portno);
+        printf("can connect to port %s:%i", hostname, portno);
     }
     else
     {
-        //printf("Port %s:%i is open", hostname, portno);
+        printf("can't connect to port %s:%i", hostname, portno);
     }
     
     close(sockfd);
