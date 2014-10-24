@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AA6D629419EB3C88009D7295 /* SINetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6D629219EB3C88009D7295 /* SINetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA6D629519EB3C88009D7295 /* SINetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6D629319EB3C88009D7295 /* SINetwork.m */; };
+		AA8A799B19FB0FC40092458F /* SITask.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8A799919FB0FC40092458F /* SITask.h */; };
+		AA8A799C19FB0FC40092458F /* SITask.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8A799A19FB0FC40092458F /* SITask.m */; };
 		AAD0C0AB19E48B4400B24217 /* SystemInfoKit.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0AA19E48B4400B24217 /* SystemInfoKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAD0C0B519E48B4400B24217 /* SystemInfoKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD0C0B419E48B4400B24217 /* SystemInfoKitTests.m */; };
 		AAD0C0C419E48C6000B24217 /* SIProcesses.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD0C0BE19E48C6000B24217 /* SIProcesses.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		AA6D629219EB3C88009D7295 /* SINetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SINetwork.h; sourceTree = "<group>"; };
 		AA6D629319EB3C88009D7295 /* SINetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINetwork.m; sourceTree = "<group>"; };
+		AA8A799919FB0FC40092458F /* SITask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SITask.h; sourceTree = "<group>"; };
+		AA8A799A19FB0FC40092458F /* SITask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SITask.m; sourceTree = "<group>"; };
 		AAD0C0A519E48B4400B24217 /* SystemInfoKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SystemInfoKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAD0C0A919E48B4400B24217 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAD0C0AA19E48B4400B24217 /* SystemInfoKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemInfoKit.h; sourceTree = "<group>"; };
@@ -91,6 +95,8 @@
 				AAD0C0A819E48B4400B24217 /* Supporting Files */,
 				AA6D629219EB3C88009D7295 /* SINetwork.h */,
 				AA6D629319EB3C88009D7295 /* SINetwork.m */,
+				AA8A799919FB0FC40092458F /* SITask.h */,
+				AA8A799A19FB0FC40092458F /* SITask.m */,
 			);
 			path = SystemInfoKit;
 			sourceTree = "<group>";
@@ -131,6 +137,7 @@
 				AAD0C0C619E48C6000B24217 /* SINetworkMonitor.h in Headers */,
 				AAD0C0C419E48C6000B24217 /* SIProcesses.h in Headers */,
 				AA6D629419EB3C88009D7295 /* SINetwork.h in Headers */,
+				AA8A799B19FB0FC40092458F /* SITask.h in Headers */,
 				AAD0C0C819E48C6000B24217 /* SIProcessKiller.h in Headers */,
 				AAD0C0CC19E495B700B24217 /* SIProcess.h in Headers */,
 			);
@@ -235,6 +242,7 @@
 				AA6D629519EB3C88009D7295 /* SINetwork.m in Sources */,
 				AAD0C0CD19E495B700B24217 /* SIProcess.m in Sources */,
 				AAD0C0C519E48C6000B24217 /* SIProcesses.m in Sources */,
+				AA8A799C19FB0FC40092458F /* SITask.m in Sources */,
 				AAD0C0C719E48C6000B24217 /* SINetworkMonitor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

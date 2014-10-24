@@ -56,9 +56,11 @@ label:
     
     // reuse
     
+    /*
     int option = 1;
     sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char*)&option, sizeof(option));
+    */
     
     // bind socket
     if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0)
