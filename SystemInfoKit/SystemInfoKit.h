@@ -18,6 +18,7 @@ FOUNDATION_EXPORT const unsigned char SystemInfoKitVersionString[];
 
 #import "SIProcesses.h"
 #import "SIProcess.h"
-#import "SINetwork.h"
+#import "SIPort.h"
 #import "SINetworkMonitor.h"
 #import "SIProcessKiller.h"
+#import "SITask.h"

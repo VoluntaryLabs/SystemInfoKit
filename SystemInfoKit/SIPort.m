@@ -1,12 +1,12 @@
 //
-//  SINetwork.m
+//  SIPort.m
 //  SystemInfoKit
 //
 //  Created by Steve Dekorte on 10/12/14.
 //  Copyright (c) 2014 voluntary.net. All rights reserved.
 //
 
-#import "SINetwork.h"
+#import "SIPort.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -16,25 +16,21 @@
 #include <netinet/in.h>
 #include <netdb.h>
 
-@implementation SINetwork
+@implementation SIPort
 
-static SINetwork *sharedSINetwork = nil;
+static SIPort *sharedSIPort = nil;
 
-+ (SINetwork *)sharedSINetwork
++ (SIPort *)portWithNumber:(NSNumber *)aPortNumber
 {
-    if (sharedSINetwork == nil)
-    {
-        sharedSINetwork = [[SINetwork alloc] init];
-    }
-    
-    return sharedSINetwork;
-    
+    SIPort *port = [[SIPort alloc] init];
+    port.portNumber = aPortNumber;
+    return port;
 }
 
-- (BOOL)canBindPort:(NSNumber *)aPort
+- (BOOL)canBind
 {
     int sockfd;
-    int portno = aPort.intValue;
+    int portno = self.portNumber.intValue;
     struct sockaddr_in serv_addr;
     BOOL canBind = NO;
     
@@ -80,9 +76,9 @@ label:
     return canBind;
 }
 
-- (BOOL)canConnectToPort:(NSNumber *)aPort
+- (BOOL)canConnect
 {
-    int portno     = aPort.intValue;
+    int portno     = self.portNumber.intValue;
     char *hostname = "127.0.0.1";
     
     int sockfd;
@@ -130,16 +126,40 @@ label:
     return canConnect;
 }
 
-- (NSNumber *)firstBindablePortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
+- (SIPort *)nextPort
+{
+    return [SIPort portWithNumber:@(self.portNumber.intValue + 1)];
+}
+
+- (SIPort *)nextBindablePort
+{
+    SIPort *port = [self nextPort];
+    int maxPort = 65535 - 1;
+    
+    while (port.portNumber.intValue < maxPort)
+    {
+        if ([port canBind] && ![port canConnect])
+        {
+            return port;
+        }
+        
+        port = [port nextPort];
+    }
+    
+    return nil;
+}
+
+/*
++ (SIPort *)firstBindablePortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
 {
     for (int port = lowPort.intValue; port < highPort.intValue + 1; port ++)
     {
-        NSNumber *portNumber = [NSNumber numberWithInt:port];
+        SIPort *siPort = [SIPort portWithNumber:@(port)];
         
-        if ([self canBindPort:portNumber] && ![self canConnectToPort:portNumber])
+        if ([siPort canBind] && ![siPort canConnect])
         {
-            printf("found unused port %i\n", portNumber.intValue);
-            return portNumber;
+            printf("found unused port %i\n", siPort.portNumber.intValue);
+            return siPort;
         }
     }
     
@@ -162,5 +182,6 @@ label:
     
     return openPorts;
 }
+*/
 
 @end
