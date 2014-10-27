@@ -27,6 +27,14 @@ static SIPort *sharedSIPort = nil;
     return port;
 }
 
+- (id)init
+{
+    self = [super init];
+    //self.hostName = @"127.0.0.1";
+    
+    return self;
+}
+
 - (BOOL)canBind
 {
     int sockfd;
@@ -78,8 +86,8 @@ label:
 
 - (BOOL)canConnect
 {
-    int portno     = self.portNumber.intValue;
-    char *hostname = "127.0.0.1";
+    const char *hostname = self.hostName ? self.hostName.UTF8String : "127.0.0.1";
+    int portno = self.portNumber.intValue;
     
     int sockfd;
     struct sockaddr_in serv_addr;
@@ -112,14 +120,21 @@ label:
     
     if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) == 0)
     {
-        // we could connect so the port must be active
         canConnect = YES;
-        printf("V conn %i\n", portno);
+        
+        if (self.debug)
+        {
+            printf("V conn %i\n", portno);
+        }
     }
     else
     {
         canConnect = NO;
-        printf("X conn %i\n", portno);
+        
+        if (self.debug)
+        {
+            printf("X conn %i\n", portno);
+        }
     }
     
     close(sockfd);
@@ -148,40 +163,5 @@ label:
     
     return nil;
 }
-
-/*
-+ (SIPort *)firstBindablePortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
-{
-    for (int port = lowPort.intValue; port < highPort.intValue + 1; port ++)
-    {
-        SIPort *siPort = [SIPort portWithNumber:@(port)];
-        
-        if ([siPort canBind] && ![siPort canConnect])
-        {
-            printf("found unused port %i\n", siPort.portNumber.intValue);
-            return siPort;
-        }
-    }
-    
-    return nil;
-}
-
-- (NSMutableArray *)bindablePortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort
-{
-    NSMutableArray *openPorts = [NSMutableArray array];
-    
-    for (int port = lowPort.intValue; port < highPort.intValue + 1; port ++)
-    {
-        NSNumber *portNumber = [NSNumber numberWithInt:port];
-        
-        if ([self canBindPort:portNumber] && ![self canConnectToPort:portNumber])
-        {
-            [openPorts addObject:portNumber];
-        }
-    }
-    
-    return openPorts;
-}
-*/
 
 @end

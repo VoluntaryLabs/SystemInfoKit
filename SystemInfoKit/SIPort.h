@@ -10,19 +10,16 @@
 
 @interface SIPort : NSObject
 
-//@property (retain, nonatomic) NSString *hostName;
+@property (retain, nonatomic) NSString *hostName;
 @property (retain, nonatomic) NSNumber *portNumber;
+@property (assign, nonatomic) BOOL debug;
 
 + (SIPort *)portWithNumber:(NSNumber *)aNumber;
 
 - (BOOL)canConnect;
 - (BOOL)canBind;
 
-//+ (NSMutableArray *)bindablePortsBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
-//+ (SIPort *)firstBindablePortBetween:(NSNumber *)lowPort and:(NSNumber *)highPort;
-
 - (SIPort *)nextPort;
-
 - (SIPort *)nextBindablePort;
 
 
