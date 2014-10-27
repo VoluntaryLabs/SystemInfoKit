@@ -69,6 +69,11 @@
         return;
     }
 
+    if (![self checkPortsAreOpen])
+    {
+        return;
+    }
+    
     [self.task launch];
 
     if (self.task.isRunning)
@@ -96,6 +101,35 @@
 - (NSString *)taskName
 {
     return [self.task.launchPath lastPathComponent];
+}
+
+- (BOOL)checkPortsAreOpen
+{
+    
+    if (self.waitOnConnectToPorts)
+    {
+        for (NSNumber *port in self.waitOnConnectToPorts)
+        {
+            SIPort *siPort = [SIPort portWithNumber:port];
+            
+            while (!siPort.canBind)
+            {
+                NSString *error = [NSString stringWithFormat:@"SITask %@ was assigned port %@ but we can't bind to it before launch.", self.taskName, port];
+                [NSException raise:error format:nil];
+                return NO;
+            }
+            
+            while (siPort.canConnect)
+            {
+                NSString *error = [NSString stringWithFormat:@"SITask %@ was assigned port %@ but we can connect to it before launch.", self.taskName, port];
+                [NSException raise:error format:nil];
+                return NO;
+            }
+            
+        }
+    }
+    
+    return YES;
 }
 
 - (BOOL)waitOnConnections
