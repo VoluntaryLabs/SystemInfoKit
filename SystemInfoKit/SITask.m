@@ -81,7 +81,7 @@
         [self registerForAppTermination];
         [SIProcessKiller.sharedSIProcessKiller onRestartKillTask:self.task];
         
-        [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPush" object:self];
+        [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPushNotification" object:self];
 
         if (![self waitOnConnections])
         {
@@ -89,7 +89,7 @@
             [NSException raise:@"SITask timeout on waitOnConnections" format:nil];
         }
         
-        [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPop" object:self];
+        [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification" object:self];
 
     }
     else
