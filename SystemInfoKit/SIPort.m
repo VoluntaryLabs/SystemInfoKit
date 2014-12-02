@@ -31,7 +31,7 @@ static SIPort *sharedSIPort = nil;
 {
     self = [super init];
     //self.hostName = @"127.0.0.1";
-    
+    self.debug = NO;
     return self;
 }
 
