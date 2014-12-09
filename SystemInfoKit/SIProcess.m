@@ -13,6 +13,8 @@
 #include <unistd.h>
 #include <errno.h>
 
+#import <Cocoa/Cocoa.h>
+
 @implementation SIProcess
 
 - (NSDictionary *)info
