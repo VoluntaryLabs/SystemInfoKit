@@ -70,12 +70,12 @@ label:
     if (bind(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0)
     {
         canBind = YES;
-        printf("V bind %i; ", portno);
+        //printf("V bind %i; ", portno);
     }
     else
     {
         canBind = NO;
-        printf("X bind %i; ", portno);
+        //printf("X bind %i; ", portno);
     }
     
     //goto label;

@@ -154,7 +154,7 @@
                 }
             }
             
-            NSLog(@"SITask %@ able to connect on port %@", self.taskName, port);
+            //NSLog(@"SITask %@ able to connect on port %@", self.taskName, port);
         }
     }
     
