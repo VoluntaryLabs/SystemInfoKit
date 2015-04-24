@@ -18,7 +18,7 @@
     self = [super init];
     
     self.task = [[NSTask alloc] init];
-    self.connectTimeout = 5;
+    self.connectTimeout = 10;
     
     [SIProcessKiller sharedSIProcessKiller]; // kill old zombie processes
     
@@ -220,7 +220,5 @@
 {
     return self.task.processIdentifier;
 }
-
-
 
 @end
