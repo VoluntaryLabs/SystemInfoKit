@@ -17,4 +17,6 @@
 
 - (BOOL)isProcessRunningWithName:(NSString *)name pid:(pid_t)pid;
 
+- (NSNumber *)numberOfCores; // move elsewhere later
+
 @end

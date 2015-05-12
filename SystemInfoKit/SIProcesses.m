@@ -15,7 +15,7 @@
 
 @implementation SIProcesses
 
-static id sharedSIProcesses = nil;
+static SIProcesses *sharedSIProcesses = nil;
 
 + (SIProcesses *)sharedSIProcesses
 {
@@ -24,6 +24,8 @@ static id sharedSIProcesses = nil;
         sharedSIProcesses = [[self.class alloc] init];
     }
     
+    //NSLog(@"numberOfCores = %@", [sharedSIProcesses numberOfCores]);
+
     return sharedSIProcesses;
 }
 
@@ -183,6 +185,14 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     }
     
     return NO;
+}
+
+- (NSNumber *)numberOfCores
+{
+    int count;
+    size_t count_len = sizeof(count);
+    sysctlbyname("hw.logicalcpu", &count, &count_len, NULL, 0);
+    return [NSNumber numberWithInteger:(NSInteger)count];
 }
 
 @end
