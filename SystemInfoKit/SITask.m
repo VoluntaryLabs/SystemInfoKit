@@ -65,7 +65,7 @@
     if (self.isRunning)
     {
         //NSLog(@"Attempted to launch task more than once.");
-        [NSException raise:@"task already running" format:nil];
+        [NSException raise:@"task already running" format:@""];
         return;
     }
 
@@ -86,7 +86,7 @@
         if (![self waitOnConnections])
         {
             [self terminate];
-            [NSException raise:@"SITask timeout on waitOnConnections" format:nil];
+            [NSException raise:@"SITask timeout on waitOnConnections" format:@""];
         }
         
         [NSNotificationCenter.defaultCenter postNotificationName:@"ProgressPopNotification" object:self];
@@ -94,7 +94,7 @@
     }
     else
     {
-        [NSException raise:@"SITask not running after launch" format:nil];
+        [NSException raise:@"SITask not running after launch" format:@""];
     }
 }
 
@@ -115,14 +115,14 @@
             while (!siPort.canBind)
             {
                 NSString *error = [NSString stringWithFormat:@"SITask %@ was assigned port %@ but we can't bind to it before launch.", self.taskName, port];
-                [NSException raise:error format:nil];
+                [NSException raise:error format:@""];
                 return NO;
             }
             
             while (siPort.canConnect)
             {
                 NSString *error = [NSString stringWithFormat:@"SITask %@ was assigned port %@ but we can connect to it before launch.", self.taskName, port];
-                [NSException raise:error format:nil];
+                [NSException raise:error format:@""];
                 return NO;
             }
             
