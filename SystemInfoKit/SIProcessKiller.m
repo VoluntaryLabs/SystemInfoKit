@@ -109,7 +109,7 @@ static SIProcessKiller *sharedSIProcessKiller = nil;
         
         if (processExists)
         {
-            [NSException raise:@"Unable to kill process" format:nil];
+            [NSException raise:@"Unable to kill process" format:@""];
         }
         else
         {
