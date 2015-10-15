@@ -115,14 +115,14 @@
             while (!siPort.canBind)
             {
                 NSString *error = [NSString stringWithFormat:@"SITask %@ was assigned port %@ but we can't bind to it before launch.", self.taskName, port];
-                [NSException raise:error format:nil];
+                [NSException raise:error format:@""];
                 return NO;
             }
             
             while (siPort.canConnect)
             {
                 NSString *error = [NSString stringWithFormat:@"SITask %@ was assigned port %@ but we can connect to it before launch.", self.taskName, port];
-                [NSException raise:error format:nil];
+                [NSException raise:error format:@""];
                 return NO;
             }
             
